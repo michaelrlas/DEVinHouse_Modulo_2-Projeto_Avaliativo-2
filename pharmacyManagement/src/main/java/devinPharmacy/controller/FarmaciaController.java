@@ -17,8 +17,9 @@ public class FarmaciaController {
     }
 
     @PostMapping
-    public void save(@RequestBody FarmaciaEntity farmacia) {
-        service.insert(farmacia);
+    public FarmaciaEntity save(@RequestBody FarmaciaEntity farmacia) {
+
+        return service.insert(farmacia);
     }
 
     @GetMapping
