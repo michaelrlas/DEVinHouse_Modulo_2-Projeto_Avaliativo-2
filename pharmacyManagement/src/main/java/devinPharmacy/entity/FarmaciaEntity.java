@@ -1,17 +1,17 @@
 package devinPharmacy.entity;
 
-import com.sun.istack.NotNull;
+
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
-@Entity(name = "farmacia")
+
+@Entity
+@Table(name = "farmacia")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -37,5 +37,11 @@ public class FarmaciaEntity {
     private String telefone;
 
     private String celular;
+
+
+    @OneToOne(fetch = FetchType.EAGER, cascade =CascadeType.ALL)
+    @JoinColumn (name="endereco_id", referencedColumnName = "id")
+    private EnderecoEntity enderecoEntity;
+
 
 }
