@@ -1,7 +1,11 @@
 package devinPharmacy.controller;
 
+import devinPharmacy.dto.FarmaciaDto;
 import devinPharmacy.entity.FarmaciaEntity;
 import devinPharmacy.service.FarmaciaService;
+import org.apache.catalina.connector.Response;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,10 +20,27 @@ public class FarmaciaController {
         this.service = service;
     }
 
-    @PostMapping
-    public FarmaciaEntity save(@RequestBody FarmaciaEntity farmacia) {
+   // @PostMapping
+  //  public FarmaciaEntity save(@RequestBody FarmaciaEntity farmacia) {
 
-        return service.insert(farmacia);
+  //      return service.insert(farmacia);
+ //   }
+
+    @PostMapping
+
+    public ResponseEntity save(@RequestBody FarmaciaEntity farmacia) {
+        try {
+            FarmaciaDto farmaciaDto = new FarmaciaDto();
+
+            farmaciaDto.setDataP(farmacia);
+
+            service.insert(farmacia);
+            return new ResponseEntity<>(new FarmaciaDto(Response.SC_CREATED,"Nova farmácia cadastrada",farmaciaDto.getDataP()), HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+
     }
 
     @GetMapping

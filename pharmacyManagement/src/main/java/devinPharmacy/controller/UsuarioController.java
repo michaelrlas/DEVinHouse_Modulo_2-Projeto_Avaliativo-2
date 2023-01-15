@@ -1,7 +1,11 @@
 package devinPharmacy.controller;
 
+import devinPharmacy.dto.UsuarioDto;
 import devinPharmacy.entity.UsuarioEntity;
 import devinPharmacy.service.UsuarioService;
+import org.apache.catalina.connector.Response;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,9 +20,22 @@ public class UsuarioController {
         this.service = service;
     }
 
+
     @PostMapping
-    public void save(@RequestBody UsuarioEntity usuario) {
-        service.insert(usuario);
+
+    public ResponseEntity save(@RequestBody UsuarioEntity usuario) {
+        try {
+            UsuarioDto usuarioDto = new UsuarioDto ();
+
+            usuarioDto.setDataUser(usuario);
+
+            service.insert(usuario);
+            return new ResponseEntity<>(new UsuarioDto(Response.SC_CREATED,"Novo usuario cadastrado",usuarioDto.getDataUser()), HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+
     }
 
     @GetMapping

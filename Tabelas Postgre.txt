@@ -1,0 +1,50 @@
+//TABELA DE ENDEREÇO
+create table endereco (
+id serial primary key,
+	cep varchar (20) not null,
+	logradouro varchar (60) not null,
+	numero varchar (10) not null,
+	bairro varchar (60) not null,
+	cidade varchar (30) not null,
+	estado varchar (40) not null,
+	complemento varchar (100),
+	latitude varchar (60),
+	longitude varchar (60)
+)
+
+//TABELA DE FARMACIA
+create table farmacia (
+id serial primary key,
+	razao_social varchar (40) not null,
+	cnpj varchar (20) not null,
+	nome_fantasia varchar (40) not null,
+	email varchar (60) not null,
+	telefone varchar (20),
+	celular varchar (40),
+	id_endereco int references endereco (id)
+)
+
+//Utilizei esse comando para criar a FK após ter criado a tabela
+
+ALTER TABLE farmacia  
+ADD COLUMN endereco_id integer references endereco(id);
+
+//TABELA DE NEDICAMENTO
+create table medicamento (
+id serial primary key,
+	nome_medicamento varchar (60) not null,
+	nome_laboratorio varchar (60) not null,
+	dosagem_medicamento varchar (60) not null,
+	descricao_medicamento varchar (200) not null,
+	preco_unitario varchar (20) not null,
+	tipo_medicamento varchar (60) not null
+)
+
+
+//TABELA DE USUARIO
+create table usuario (
+id serial primary key,
+	email varchar (60) not null,
+	senha varchar (20) not null
+)
+
