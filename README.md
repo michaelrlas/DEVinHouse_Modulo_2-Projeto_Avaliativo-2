@@ -10,7 +10,7 @@ Retorna todos os dados no formato JSON;
 
 3 API
 Foi utilizado a API da viacep para a função de completar automaticamente alguns campos de endereço.
-Documentação viacep: https://viacep.com.br/
+Documentação viacep: https://viacep.com.br/  
 Para o consumo dessa api foi implementado nas dependencias o Feign que é um web service
 Documentação Feign: https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-openfeign
 
